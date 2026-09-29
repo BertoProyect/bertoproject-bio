@@ -77,6 +77,40 @@
       gap: 40px;
     }
 
+    /* Botón de compartir: control circular de Apple (44×44) en la esquina superior derecha */
+    main { position: relative; }
+    .share {
+      position: absolute;
+      top: calc(16px + env(safe-area-inset-top));
+      right: 16px;
+      width: 44px; height: 44px;
+      display: grid; place-items: center;
+      padding: 0;
+      border: 1px solid var(--hairline);
+      border-radius: 50%;
+      background: var(--card);
+      color: var(--ink);
+      cursor: pointer;
+      transition: transform .25s var(--ease-out), color .2s ease, border-color .2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .share svg { width: 20px; height: 20px; margin-top: -2px; }
+    .share:active { transform: scale(.92); color: var(--brand-ink); border-color: var(--brand); }
+    .share:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+    @media (hover: hover) { .share:hover { color: var(--brand-ink); border-color: color-mix(in srgb, var(--brand) 45%, transparent); } }
+
+    .toast {
+      position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom));
+      transform: translate(-50%, 12px);
+      padding: 10px 18px;
+      border-radius: 9999px;
+      background: var(--ink); color: var(--canvas);
+      font-size: 14px; letter-spacing: -0.224px; font-weight: 600;
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s ease, transform .35s var(--ease-out);
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
     /* Cabecera */
     header { display: flex; flex-direction: column; align-items: center; text-align: center; }
     .avatar {
@@ -84,8 +118,7 @@
       border-radius: 50%;
       object-fit: cover;
       background: var(--card);
-      /* anillo azul con separación, como el de una historia */
-      box-shadow: 0 0 0 3px var(--canvas), 0 0 0 5.5px var(--brand);
+      box-shadow: 0 0 0 3px var(--canvas), 0 0 0 5.5px var(--ink);
     }
     h1 {
       margin: 26px 0 0;
@@ -132,6 +165,18 @@
     .icon svg { width: 24px; height: 24px; }
     .link:active .icon { background: var(--brand-tint); color: var(--brand-ink); }
 
+    /* Logo de Órbita: silueta del logo original, del color del icono */
+    .logo-orbita {
+      width: 26px; height: 26px;
+      background: currentColor;
+      -webkit-mask: url(/orbita-logo.png) center / contain no-repeat;
+      mask: url(/orbita-logo.png) center / contain no-repeat;
+    }
+
+    /* Variantes de color (se activan con una clase en <body>) */
+    .v-iconos .icon { color: var(--brand); }
+    .v-nombres .label { color: var(--brand); }
+
     .text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
     .label { font-weight: 600; line-height: 1.24; }
     .sub { margin-top: 2px; font-size: 14px; line-height: 1.43; letter-spacing: -0.224px; color: var(--ink-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -162,6 +207,9 @@
 </head>
 <body>
   <main>
+    <button class="share rise" style="--i:0" type="button" aria-label="Compartir esta página">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5"/><path d="M8 10.5H6.5A1.5 1.5 0 0 0 5 12v7.5A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V12a1.5 1.5 0 0 0-1.5-1.5H16"/></svg>
+    </button>
     <header>
       <img class="avatar rise" style="--i:0" src="/avatar.webp" width="112" height="112" alt="BertoProject">
       <h1 class="rise" style="--i:1">BertoProject</h1>
@@ -203,7 +251,7 @@
       <h2 class="section-title rise" style="--i:6" id="negocio">Mi negocio</h2>
       <a class="link rise" style="--i:7" href="/orbita">
         <span class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9.8"/><path d="M2.2 12h19.6M12 2.2c2.6 2.7 4 6 4 9.8s-1.4 7.1-4 9.8c-2.6-2.7-4-6-4-9.8s1.4-7.1 4-9.8Z"/></svg>
+          <span class="logo-orbita"></span>
         </span>
         <span class="text"><span class="label">Órbita Webs</span><span class="sub">orbitawebs.com</span></span>
         <svg class="chevron" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1.5 1.5 7.5 7.5l-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -211,6 +259,32 @@
     </section>
 
     <footer class="rise" style="--i:8">© 2026 BertoProject</footer>
+    <div class="toast" role="status" aria-live="polite"></div>
   </main>
+  <script>
+    (function () {
+      var btn = document.querySelector('.share');
+      var toast = document.querySelector('.toast');
+      var timer;
+      function avisar(texto) {
+        toast.textContent = texto;
+        toast.classList.add('show');
+        clearTimeout(timer);
+        timer = setTimeout(function () { toast.classList.remove('show'); }, 2000);
+      }
+      btn.addEventListener('click', function () {
+        var url = location.origin + '/';
+        var datos = { title: 'BertoProject', url: url };
+        if (navigator.share) {
+          navigator.share(datos).catch(function () {});
+        } else if (navigator.clipboard) {
+          navigator.clipboard.writeText(url).then(function () { avisar('Enlace copiado'); },
+                                                  function () { window.prompt('Copia el enlace:', url); });
+        } else {
+          window.prompt('Copia el enlace:', url);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
