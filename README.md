@@ -11,6 +11,7 @@ Cada push a `main` se publica solo en Cloudflare en aproximadamente un minuto.
 | Cambiar a dónde lleva `/ig`, `/tiktok`, `/yt`, `/orbita` o crear una ruta nueva | `public/_redirects` |
 | Cambiar textos, orden de botones o añadir uno | `public/index.html` |
 | Cambiar la foto | Reemplazar `public/avatar.webp` (cuadrada, 320×320) y `public/og.jpg` |
+| Cambiar el icono (pestaña, Google, iPhone, Android) | `favicon.ico`, `icon-*.png`, `apple-touch-icon.png` en `public/` |
 
 ## Rutas cortas
 
