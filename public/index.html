@@ -33,6 +33,7 @@
       --brand: #00a3ff;                /* azul BertoProject: anillo, foco, estados */
       --brand-ink: #0088d6;            /* mismo tono, más profundo: legible sobre blanco (3.8:1) */
       --brand-tint: rgba(0, 163, 255, .12);
+      --card-press: #ebebf0;           /* tarjeta hundida al pulsar */
 
       --r-lg: 18px;
       --r-icon: 11px;
@@ -51,6 +52,7 @@
         --ink-muted: #a1a1a6;
         --brand-ink: #00a3ff;          /* sobre oscuro el azul original ya se lee (6.2:1) */
         --brand-tint: rgba(0, 163, 255, .16);
+        --card-press: #2c2c2e;
       }
     }
 
@@ -147,10 +149,18 @@
       border-radius: var(--r-lg);
       color: var(--ink);
       text-decoration: none;
-      transition: transform .25s var(--ease-out), border-color .2s ease;
+      transition: transform .3s var(--ease-out), background-color .3s ease, border-color .3s ease;
       -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      user-select: none;
     }
-    .link:active { transform: scale(.97); border-color: var(--brand); }
+    /* Efecto de presionar: se hunde, se oscurece y se marca en azul */
+    .link:active, .link.is-pressed {
+      transform: scale(.96);
+      background: var(--card-press);
+      border-color: var(--brand);
+      transition-duration: .08s;
+    }
     .link:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
 
     .icon {
@@ -163,7 +173,7 @@
       transition: background-color .2s ease, color .2s ease;
     }
     .icon svg { width: 24px; height: 24px; }
-    .link:active .icon { background: var(--brand-tint); color: var(--brand-ink); }
+    .link:active .icon, .link.is-pressed .icon { background: var(--brand-tint); color: var(--brand-ink); }
 
     /* Logo de Órbita: silueta del logo original, del color del icono */
     .logo-orbita {
@@ -197,7 +207,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .link, .icon, .chevron { transition: none; }
-      .link:active { transform: none; }
+      .link:active, .link.is-pressed { transform: none; }
     }
   </style>
 </head>
@@ -268,6 +278,23 @@
         clearTimeout(timer);
         timer = setTimeout(function () { toast.classList.remove('show'); }, 2000);
       }
+      // iOS solo aplica :active si la página escucha toques
+      document.addEventListener('touchstart', function () {}, { passive: true });
+
+      // Enseña el efecto de presionar un instante antes de abrir el enlace
+      document.querySelectorAll('.link').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+          e.preventDefault();
+          a.classList.add('is-pressed');
+          setTimeout(function () { location.href = a.href; }, 140);
+        });
+      });
+      // Al volver atrás (caché del navegador) la tarjeta no debe quedarse hundida
+      window.addEventListener('pageshow', function () {
+        document.querySelectorAll('.link.is-pressed').forEach(function (a) { a.classList.remove('is-pressed'); });
+      });
+
       btn.addEventListener('click', function () {
         var url = location.origin + '/';
         var datos = { title: 'BertoProject', url: url };
