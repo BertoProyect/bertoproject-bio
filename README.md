@@ -10,7 +10,6 @@ Cada push a `main` se publica solo en Cloudflare en aproximadamente un minuto.
 |---|---|
 | Cambiar a dónde lleva `/ig`, `/tiktok`, `/yt`, `/orbita` o crear una ruta nueva | `public/_redirects` |
 | Cambiar textos, orden de botones o añadir uno | `public/index.html` |
-| Destacar otro botón en azul | Mover la clase `featured` a otro `<a class="link">` (solo uno) |
 | Cambiar la foto | Reemplazar `public/avatar.webp` (cuadrada, 320×320) y `public/og.jpg` |
 
 ## Rutas cortas
@@ -26,7 +25,7 @@ Los botones apuntan a estas rutas, no directamente a las redes. Así, cuando se 
 
 ## Diseño
 
-Se basa en el sistema de diseño de Linear (colección awesome-design-md): fondo `#010102`, superficies con borde fino y un único acento, el azul BertoProject `#00A3FF`. Ese azul se usa solo en el botón destacado.
+Sigue el sistema de diseño de Apple (colección awesome-design-md): fondo parchment `#f5f5f7`, tarjetas blancas con radio de 18px y borde fino, texto a 17px y un único azul para lo que se puede pulsar. En modo oscuro cambia sola a fondo negro.
 
 ## Probar en local (opcional)
 
