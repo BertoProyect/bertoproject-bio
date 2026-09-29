@@ -25,7 +25,7 @@ Los botones apuntan a estas rutas, no directamente a las redes. Así, cuando se 
 
 ## Diseño
 
-Sigue el sistema de diseño de Apple (colección awesome-design-md): fondo parchment `#f5f5f7`, tarjetas blancas con radio de 18px y borde fino, texto a 17px y un único azul para lo que se puede pulsar. En modo oscuro cambia sola a fondo negro.
+Sigue el sistema de diseño de Apple (colección awesome-design-md): fondo parchment `#f5f5f7`, tarjetas blancas con radio de 18px y borde fino, texto a 17px y un único azul, `#00A3FF`. Solo existe en modo claro: el modo oscuro está bloqueado.
 
 ## Probar en local (opcional)
 

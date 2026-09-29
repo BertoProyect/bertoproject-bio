@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>BertoProject</title>
   <meta name="description" content="BertoProject — TikTok, Instagram, YouTube y Órbita Webs.">
-  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-  <meta name="color-scheme" content="light dark">
+  <!-- Solo modo claro: "only" evita que el navegador oscurezca la página por su cuenta -->
+  <meta name="color-scheme" content="only light">
+  <meta name="supported-color-schemes" content="light">
+  <meta name="theme-color" content="#f5f5f7">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="canonical" href="https://bertoproject.com/">
 
@@ -40,20 +41,9 @@
       --text: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
     }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --canvas: #000000;
-        --card: #1d1d1f;
-        --icon-bg: #2a2a2c;
-        --hairline: rgba(255, 255, 255, .08);
-        --ink: #f5f5f7;
-        --ink-muted: #a1a1a6;
-        --brand-tint: rgba(0, 163, 255, .16);
-      }
-    }
-
     *, *::before, *::after { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; }
+    :root, html, body { color-scheme: only light; }
+    html { -webkit-text-size-adjust: 100%; background: #f5f5f7; }
     body {
       margin: 0;
       min-height: 100svh;
