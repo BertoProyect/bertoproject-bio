@@ -1,0 +1,7 @@
+# Rutas cortas → destino real. Formato: /ruta  URL  código
+# 302 = temporal (el navegador no lo cachea: puedes cambiar el destino cuando quieras)
+/tiktok  https://www.tiktok.com/@berto.project  302
+/tk      https://www.tiktok.com/@berto.project  302
+/ig      https://www.instagram.com/berto.project  302
+/yt      https://www.youtube.com/@BertoProjectt  302
+/orbita  https://orbitawebs.com/  302
