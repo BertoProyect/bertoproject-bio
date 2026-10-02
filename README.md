@@ -19,7 +19,7 @@ Cada push a `main` se publica solo en Cloudflare en aproximadamente un minuto.
 |---|---|
 | `/tiktok`, `/tk` | tiktok.com/@berto.project |
 | `/ig` | instagram.com/berto.project |
-| `/yt` | youtube.com/@BertoProjectt |
+| `/yt` | youtube.com/@bertoprojectt |
 | `/orbita` | orbitawebs.com |
 
 Los botones apuntan a estas rutas, no directamente a las redes. Así, cuando se añada el conteo de clics, no habrá que tocar los enlaces.
