@@ -12,6 +12,15 @@ Cada push a `main` se publica solo en Cloudflare en aproximadamente un minuto.
 | Cambiar textos, orden de botones o añadir uno | `public/index.html` |
 | Cambiar la foto | Reemplazar `public/avatar.webp` (cuadrada, 320×320) y `public/og.jpg` |
 | Cambiar el icono (pestaña, Google, iPhone, Android) | `favicon.ico`, `icon-*.png`, `apple-touch-icon.png` en `public/` |
+| Añadir una página nueva para que Google la indexe | `public/sitemap.xml` (una `<url>` por página) |
+| Abrir una red social nueva y vincularla en Google | `sameAs` en el bloque `application/ld+json` de `public/index.html` |
+
+## Google
+
+- `public/robots.txt` permite rastrear todo y apunta al sitemap.
+- `public/sitemap.xml` lista las páginas que se deben indexar (ahora solo la portada).
+- `index.html` lleva canonical a `https://bertoproject.com/` y datos estructurados (WebSite, ProfilePage y Person con `sameAs` a TikTok, Instagram y YouTube).
+- La propiedad se gestiona en Google Search Console (propiedad de tipo dominio, verificada por DNS en Cloudflare).
 
 ## Rutas cortas
 

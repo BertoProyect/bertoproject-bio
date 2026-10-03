@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>BertoProject</title>
-  <meta name="description" content="BertoProject — TikTok, Instagram, YouTube y Órbita Webs.">
+  <title>BertoProject · Emprendimiento y desarrollo personal</title>
+  <meta name="description" content="BertoProject: contenido sobre emprendimiento y desarrollo personal. Todos mis enlaces: TikTok, Instagram, YouTube y Órbita Webs, mi negocio de páginas web.">
   <!-- Solo modo claro: "only" evita que el navegador oscurezca la página por su cuenta -->
   <meta name="color-scheme" content="only light">
   <meta name="supported-color-schemes" content="light">
@@ -17,14 +17,59 @@
   <link rel="manifest" href="/site.webmanifest">
   <meta name="apple-mobile-web-app-title" content="BertoProject">
   <meta name="application-name" content="BertoProject">
-  <!-- Nombre del sitio en los resultados de Google -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"BertoProject","url":"https://bertoproject.com/"}</script>
+  <!--
+    Datos para Google:
+    - WebSite: nombre del sitio que aparece en los resultados.
+    - ProfilePage + Person: dice a Google que esta es la página oficial de BertoProject
+      y que esos perfiles (sameAs) son tuyos. Si abres una red nueva, añádela a sameAs.
+  -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://bertoproject.com/#website",
+        "name": "BertoProject",
+        "url": "https://bertoproject.com/",
+        "inLanguage": "es"
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://bertoproject.com/#profilepage",
+        "url": "https://bertoproject.com/",
+        "name": "BertoProject",
+        "isPartOf": { "@id": "https://bertoproject.com/#website" },
+        "mainEntity": { "@id": "https://bertoproject.com/#berto" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://bertoproject.com/#berto",
+        "name": "BertoProject",
+        "alternateName": "@berto.project",
+        "url": "https://bertoproject.com/",
+        "image": "https://bertoproject.com/og.jpg",
+        "description": "Contenido sobre emprendimiento y desarrollo personal.",
+        "sameAs": [
+          "https://www.tiktok.com/@berto.project",
+          "https://www.instagram.com/berto.project",
+          "https://www.youtube.com/@bertoprojectt"
+        ]
+      }
+    ]
+  }
+  </script>
   <link rel="canonical" href="https://bertoproject.com/">
 
   <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="BertoProject">
+  <meta property="og:locale" content="es_ES">
   <meta property="og:title" content="BertoProject">
-  <meta property="og:description" content="TikTok, Instagram, YouTube y Órbita Webs.">
+  <meta property="og:description" content="Emprendimiento y desarrollo personal. TikTok, Instagram, YouTube y Órbita Webs.">
   <meta property="og:image" content="https://bertoproject.com/og.jpg">
+  <meta property="og:image:width" content="630">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Foto de BertoProject">
   <meta property="og:url" content="https://bertoproject.com/">
   <meta name="twitter:card" content="summary">
 
