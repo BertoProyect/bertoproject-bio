@@ -1,0 +1,7 @@
+# robots.txt — bertoproject.com
+# Todo el sitio se puede rastrear. Las rutas cortas (/ig, /tiktok, /yt…) son
+# redirecciones: Google las sigue sin problema, no hace falta bloquearlas.
+User-agent: *
+Allow: /
+
+Sitemap: https://bertoproject.com/sitemap.xml
